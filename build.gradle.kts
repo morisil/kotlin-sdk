@@ -13,6 +13,7 @@ plugins {
     alias(libs.plugins.jreleaser)
     alias(libs.plugins.atomicfu)
     `maven-publish`
+    alias(libs.plugins.kotlinx.binary.compatibility.validator)
 }
 
 group = "io.modelcontextprotocol"

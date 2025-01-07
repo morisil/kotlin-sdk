@@ -11,6 +11,7 @@ ktor = "3.0.2"
 mockk = "1.13.13"
 logging = "7.0.0"
 jreleaser = "1.15.0"
+binaryCompatibilityValidatorPlugin = "0.17.0"
 
 [libraries]
 # Kotlinx libraries
@@ -38,3 +39,4 @@ kotlin-serialization = { id = "org.jetbrains.kotlin.plugin.serialization", versi
 dokka = { id = "org.jetbrains.dokka", version.ref = "dokka" }
 jreleaser = { id = "org.jreleaser", version.ref = "jreleaser"}
 atomicfu = { id = "org.jetbrains.kotlinx.atomicfu", version.ref = "atomicfu" }
+kotlinx-binary-compatibility-validator = { id = "org.jetbrains.kotlinx.binary-compatibility-validator", version.ref = "binaryCompatibilityValidatorPlugin" }
