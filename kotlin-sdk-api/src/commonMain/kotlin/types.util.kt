@@ -272,7 +272,7 @@ internal object JSONRPCMessagePolymorphicSerializer :
     }
 }
 
-internal val EmptyJsonObject = JsonObject(emptyMap())
+public val EmptyJsonObject: JsonObject = JsonObject(emptyMap())
 
 public class RequestIdSerializer : KSerializer<RequestId> {
     override val descriptor: SerialDescriptor = buildClassSerialDescriptor("RequestId")

@@ -3,6 +3,7 @@ package client
 import InMemoryTransport
 import io.modelcontextprotocol.kotlin.sdk.InitializedNotification
 import io.modelcontextprotocol.kotlin.sdk.JSONRPCMessage
+import io.modelcontextprotocol.kotlin.sdk.shared.InternalMcpApi
 import kotlinx.coroutines.runBlocking
 import io.modelcontextprotocol.kotlin.sdk.toJSON
 import org.junit.jupiter.api.BeforeEach
@@ -38,6 +39,7 @@ class InMemoryTransportTest {
         }
     }
 
+    @OptIn(InternalMcpApi::class)
     @Test
     fun `should send message from client to server`() {
         runBlocking {
@@ -54,6 +56,7 @@ class InMemoryTransportTest {
         }
     }
 
+    @OptIn(InternalMcpApi::class)
     @Test
     fun `should send message from server to client`() {
         runBlocking {
@@ -90,6 +93,7 @@ class InMemoryTransportTest {
         }
     }
 
+    @OptIn(InternalMcpApi::class)
     @Test
     fun `should throw error when sending after close`() {
         runBlocking {
@@ -105,6 +109,7 @@ class InMemoryTransportTest {
         }
     }
 
+    @OptIn(InternalMcpApi::class)
     @Test
     fun `should queue messages sent before start`() {
         runBlocking {

@@ -42,6 +42,7 @@ public abstract class WebSocketMcpTransport : Transport {
      */
     protected abstract suspend fun initializeSession()
 
+    @OptIn(InternalMcpApi::class)
     override suspend fun start() {
         if (!initialized.compareAndSet(false, true)) {
             error(
@@ -86,6 +87,7 @@ public abstract class WebSocketMcpTransport : Transport {
         }
     }
 
+    @OptIn(InternalMcpApi::class)
     override suspend fun send(message: JSONRPCMessage) {
         if (!initialized.value) {
             error("Not connected")

@@ -6,6 +6,7 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.sse.*
 import io.modelcontextprotocol.kotlin.sdk.JSONRPCMessage
+import io.modelcontextprotocol.kotlin.sdk.shared.InternalMcpApi
 import io.modelcontextprotocol.kotlin.sdk.shared.McpJson
 import io.modelcontextprotocol.kotlin.sdk.shared.Transport
 import kotlinx.atomicfu.AtomicBoolean
@@ -97,6 +98,7 @@ public class SSEServerTransport(
      * Handle a client message, regardless of how it arrived.
      * This can be used to inform the server of messages that arrive via a means different from HTTP POST.
      */
+    @OptIn(InternalMcpApi::class)
     public suspend fun handleMessage(message: String) {
         try {
             val parsedMessage = McpJson.decodeFromString<JSONRPCMessage>(message)
@@ -112,6 +114,7 @@ public class SSEServerTransport(
         onClose?.invoke()
     }
 
+    @OptIn(InternalMcpApi::class)
     override suspend fun send(message: JSONRPCMessage) {
         if (!initialized.value) {
             throw error("Not connected")

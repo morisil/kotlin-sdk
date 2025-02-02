@@ -46,10 +46,12 @@ public class ReadBuffer {
     }
 }
 
+@OptIn(InternalMcpApi::class)
 internal fun deserializeMessage(line: String): JSONRPCMessage {
     return McpJson.decodeFromString<JSONRPCMessage>(line)
 }
 
+@OptIn(InternalMcpApi::class)
 internal fun serializeMessage(message: JSONRPCMessage): String {
     return McpJson.encodeToString(message) + "\n"
 }

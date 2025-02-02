@@ -6,6 +6,7 @@ import io.ktor.client.request.*
 import io.ktor.client.statement.*
 import io.ktor.http.*
 import io.modelcontextprotocol.kotlin.sdk.JSONRPCMessage
+import io.modelcontextprotocol.kotlin.sdk.shared.InternalMcpApi
 import io.modelcontextprotocol.kotlin.sdk.shared.McpJson
 import io.modelcontextprotocol.kotlin.sdk.shared.Transport
 import kotlinx.atomicfu.AtomicBoolean
@@ -92,6 +93,7 @@ public class SSEClientTransport(
 
                     else -> {
                         try {
+                            @OptIn(InternalMcpApi::class)
                             val message = McpJson.decodeFromString<JSONRPCMessage>(event.data ?: "")
                             onMessage?.invoke(message)
                         } catch (e: Exception) {
@@ -105,7 +107,7 @@ public class SSEClientTransport(
         endpoint.await()
     }
 
-    @OptIn(ExperimentalCoroutinesApi::class)
+    @OptIn(ExperimentalCoroutinesApi::class, InternalMcpApi::class)
     override suspend fun send(message: JSONRPCMessage) {
         if (!endpoint.isCompleted) {
             error("Not connected")

@@ -160,7 +160,7 @@ public open class Server(
     /**
      * Registers a single prompt. The prompt can then be retrieved by the client.
      *
-     * @param prompt A [Prompt] object describing the prompt.
+     * @param prompt A [io.modelcontextprotocol.kotlin.sdk.Prompt] object describing the prompt.
      * @param promptProvider A suspend function that returns the prompt content when requested by the client.
      * @throws IllegalStateException If the server does not support prompts.
      */
@@ -174,11 +174,11 @@ public open class Server(
     }
 
     /**
-     * Registers a single prompt by constructing a [Prompt] from given parameters.
+     * Registers a single prompt by constructing a [io.modelcontextprotocol.kotlin.sdk.Prompt] from given parameters.
      *
      * @param name The name of the prompt.
      * @param description An optional human-readable description of the prompt.
-     * @param arguments An optional list of [PromptArgument] that the prompt accepts.
+     * @param arguments An optional list of [io.modelcontextprotocol.kotlin.sdk.PromptArgument] that the prompt accepts.
      * @param promptProvider A suspend function that returns the prompt content when requested.
      * @throws IllegalStateException If the server does not support prompts.
      */

@@ -16,7 +16,7 @@ plugins {
 }
 
 group = "io.modelcontextprotocol"
-version = "0.3.0"
+version = "0.4.0-SNAPSHOT"
 
 val mainSourcesJar = tasks.register<Jar>("mainSourcesJar") {
     archiveClassifier = "sources"
@@ -202,6 +202,7 @@ kotlin {
         commonMain {
             kotlin.srcDir(generateLibVersionTask.map { it.sourcesDir })
             dependencies {
+                api(project(":kotlin-sdk-api"))
                 api(libs.kotlinx.serialization.json)
                 api(libs.ktor.client.cio)
                 api(libs.ktor.server.cio)

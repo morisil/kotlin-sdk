@@ -378,7 +378,7 @@ public open class Client(
     }
 
     /**
-     * Calls a tool on the server using a [CallToolRequest] object.
+     * Calls a tool on the server using a [io.modelcontextprotocol.kotlin.sdk.CallToolRequest] object.
      *
      * @param request The request object containing the tool name and arguments.
      * @param compatibility Whether to use compatibility mode for older protocol versions.

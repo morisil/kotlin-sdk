@@ -6,6 +6,7 @@ import io.modelcontextprotocol.kotlin.sdk.PingRequest
 import kotlinx.coroutines.CompletableDeferred
 import kotlinx.coroutines.runBlocking
 import io.modelcontextprotocol.kotlin.sdk.server.StdioServerTransport
+import io.modelcontextprotocol.kotlin.sdk.shared.InternalMcpApi
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.BeforeEach
 import org.junit.jupiter.api.Test
@@ -102,6 +103,7 @@ class StdioServerTransportTest {
         }
     }
 
+    @OptIn(InternalMcpApi::class)
     @Test
     fun `should read multiple messages`() {
         runBlocking {

@@ -3,6 +3,7 @@ package client
 import io.modelcontextprotocol.kotlin.sdk.InitializedNotification
 import io.modelcontextprotocol.kotlin.sdk.JSONRPCMessage
 import io.modelcontextprotocol.kotlin.sdk.PingRequest
+import io.modelcontextprotocol.kotlin.sdk.shared.InternalMcpApi
 import io.modelcontextprotocol.kotlin.sdk.shared.Transport
 import io.modelcontextprotocol.kotlin.sdk.toJSON
 import kotlinx.coroutines.CompletableDeferred
@@ -27,6 +28,7 @@ abstract class BaseTransportTest {
         assertTrue(didClose, "Transport should be closed after close() call")
     }
 
+    @OptIn(InternalMcpApi::class)
     protected suspend fun testClientRead(client: Transport) {
         client.onError = { error ->
             error.printStackTrace()

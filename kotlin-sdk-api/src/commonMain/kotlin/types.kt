@@ -2,6 +2,7 @@
 
 package io.modelcontextprotocol.kotlin.sdk
 
+import io.modelcontextprotocol.kotlin.sdk.shared.InternalMcpApi
 import io.modelcontextprotocol.kotlin.sdk.shared.McpJson
 import kotlinx.atomicfu.AtomicLong
 import kotlinx.atomicfu.atomic
@@ -117,7 +118,8 @@ public sealed interface Request {
  *
  * @return The JSON-RPC request representation.
  */
-internal fun Request.toJSON(): JSONRPCRequest {
+public fun Request.toJSON(): JSONRPCRequest {
+    @OptIn(InternalMcpApi::class)
     return JSONRPCRequest(
         method = method.value,
         params = McpJson.encodeToJsonElement(this),
@@ -130,9 +132,10 @@ internal fun Request.toJSON(): JSONRPCRequest {
  *
  * @return The decoded [Request] or null
  */
-internal fun JSONRPCRequest.fromJSON(): Request? {
+public fun JSONRPCRequest.fromJSON(): Request? {
     val serializer = selectRequestDeserializer(method)
     val params = params ?: return null
+    @OptIn(InternalMcpApi::class)
     return McpJson.decodeFromJsonElement<Request>(serializer, params)
 }
 
@@ -157,7 +160,9 @@ public sealed interface Notification {
  *
  * @return The JSON-RPC notification representation.
  */
-internal fun Notification.toJSON(): JSONRPCNotification {
+@InternalMcpApi
+public fun Notification.toJSON(): JSONRPCNotification {
+    @OptIn(InternalMcpApi::class)
     val encoded = McpJson.encodeToJsonElement<Notification>(this)
     return JSONRPCNotification(
         method.value,
@@ -170,7 +175,8 @@ internal fun Notification.toJSON(): JSONRPCNotification {
  *
  * @return The decoded [Notification].
  */
-internal fun JSONRPCNotification.fromJSON(): Notification {
+public fun JSONRPCNotification.fromJSON(): Notification {
+    @OptIn(InternalMcpApi::class)
     return McpJson.decodeFromJsonElement<Notification>(params)
 }
 

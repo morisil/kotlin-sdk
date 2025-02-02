@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="kotlin-sdk-api-jvm">
+    <output-path>$PROJECT_DIR$/kotlin-sdk-api/build/libs</output-path>
+    <root id="archive" name="kotlin-sdk-api-jvm.jar">
+      <element id="module-output" name="kotlin-sdk.kotlin-sdk-api.jvmMain" />
+    </root>
+  </artifact>
+</component>

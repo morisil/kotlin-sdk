@@ -24,17 +24,7 @@ internal const val IMPLEMENTATION_NAME = "mcp-ktor"
  */
 public typealias ProgressCallback = (Progress) -> Unit
 
-@OptIn(ExperimentalSerializationApi::class)
-@PublishedApi
-internal val McpJson: Json by lazy {
-    Json {
-        ignoreUnknownKeys = true
-        encodeDefaults = true
-        isLenient = true
-        classDiscriminatorMode = ClassDiscriminatorMode.NONE
-        explicitNulls = false
-    }
-}
+
 
 /**
  * Additional initialization options.
@@ -259,6 +249,7 @@ public abstract class Protocol(
         val handler = progressHandlers[progressToken]
         if (handler == null) {
             val error = Error(
+                @OptIn(InternalMcpApi::class)
                 "Received a progress notification for an unknown token: ${McpJson.encodeToString(notification)}",
             )
             LOGGER.error { error.message }
@@ -269,6 +260,7 @@ public abstract class Protocol(
         handler.invoke(Progress(progress, total))
     }
 
+    @OptIn(InternalMcpApi::class)
     private fun onResponse(response: JSONRPCResponse?, error: JSONRPCError?) {
         val messageId = response?.id
         val handler = responseHandlers[messageId]
@@ -326,6 +318,7 @@ public abstract class Protocol(
      *
      * Do not use this method to emit notifications! Use notification() instead.
      */
+    @OptIn(InternalMcpApi::class)
     public suspend fun <T : RequestResult> request(
         request: Request,
         options: RequestOptions? = null,
@@ -405,6 +398,7 @@ public abstract class Protocol(
     /**
      * Emits a notification, which is a one-way message that does not expect a response.
      */
+    @OptIn(InternalMcpApi::class)
     public suspend fun notification(notification: Notification) {
         LOGGER.trace { "Sending notification: ${notification.method}" }
         val transport = this.transport ?: error("Not connected")
@@ -429,6 +423,7 @@ public abstract class Protocol(
         setRequestHandler(typeOf<T>(), method, block)
     }
 
+    @OptIn(InternalMcpApi::class)
     @PublishedApi
     internal fun <T : Request> setRequestHandler(
         requestType: KType,
